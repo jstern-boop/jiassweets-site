@@ -4,11 +4,12 @@ Island Pixel Studios. Keep this file with the site repo (gen.py was lost once)."
 import os, html
 
 OUT = os.path.join(os.path.dirname(__file__), '..', 'docs')
-VER = '1'          # bump after CSS/JS changes so phones reload
+VER = '2'          # bump after CSS/JS changes so phones reload
 NOINDEX = True     # True until launch
 
 PHONE1, PHONE2 = '631-278-1700', '631-839-0948'
 EMAIL = 'jiassweets@gmail.com'
+FACEBOOK = 'https://www.facebook.com/jiassweets'
 
 PRODUCTS = [
     # slug, name, price, image
@@ -31,6 +32,7 @@ RIGHT = [('blog.html', 'Blog'), ('contact.html', 'Contact'), ('menu.html', 'Menu
 ICON = {
  'phone': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>',
  'mail': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>',
+ 'fb': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>',
  'pin': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>',
 }
 e = html.escape
@@ -57,6 +59,7 @@ def page(fname, title, desc, body, current=None):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Satisfy&display=swap">
 <link rel="stylesheet" href="css/site.css?v={VER}">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"LocalBusiness","name":"Jia's Sweets","description":"Handcrafted fudge, party favors and gift boxes made by hand on Long Island.","url":"https://jiassweets.com/","telephone":"+1-{PHONE1}","email":"{EMAIL}","areaServed":"Long Island, NY","image":"https://jiassweets.com/images/logo.png","sameAs":["{FACEBOOK}"]}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -68,6 +71,7 @@ def page(fname, title, desc, body, current=None):
   <span class="extra">
     <a href="mailto:{EMAIL}">{ICON['mail']}{EMAIL}</a>
     <a href="contact.html">{ICON['pin']}Servicing Long Island</a>
+    <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Jia's Sweets on Facebook">{ICON['fb']}Facebook</a>
   </span>
 </div></div>
 <header class="site-header">
@@ -96,7 +100,8 @@ def page(fname, title, desc, body, current=None):
       <li><a class="nowrap" href="{tel(PHONE1)}">{PHONE1}</a></li>
       <li><a class="nowrap" href="{tel(PHONE2)}">{PHONE2}</a></li>
       <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-      <li>Servicing Long Island</li></ul></div>
+      <li>Servicing Long Island</li>
+      <li><a class="social" href="{FACEBOOK}" target="_blank" rel="noopener">{ICON['fb']}Follow us on Facebook</a></li></ul></div>
     <div><h2>Order &amp; pay</h2>
       <p>We accept orders and payments with Square.</p>
       <img class="square" src="images/square.png" alt="Square" width="120" height="34">
@@ -293,6 +298,7 @@ def build():
     <a href="{tel(PHONE2)}">{ICON['phone']}{PHONE2}</a>
     <a href="mailto:{EMAIL}">{ICON['mail']}{EMAIL}</a>
     <div>{ICON['pin']}Servicing Long Island</div>
+    <a href="{FACEBOOK}" target="_blank" rel="noopener">{ICON['fb']}facebook.com/jiassweets</a>
   </div>
 </div></section>'''
     page('contact.html', "Contact | Jia's Sweets", "Contact Jia's Sweets for custom fudge, party favors, event orders and gift boxes on Long Island.", contact, 'contact.html')
