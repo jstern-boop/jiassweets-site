@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build Jia's Sweets static site into ../site. Re-run after any content change.
+"""Build Jia's Sweets static site into ../docs. Re-run after any content change.
 Island Pixel Studios. Keep this file with the site repo (gen.py was lost once)."""
 import os, html
 
-OUT = os.path.join(os.path.dirname(__file__), '..', 'site')
+OUT = os.path.join(os.path.dirname(__file__), '..', 'docs')
 VER = '1'          # bump after CSS/JS changes so phones reload
 NOINDEX = True     # True until launch
 
