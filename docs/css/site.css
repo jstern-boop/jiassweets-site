@@ -118,6 +118,7 @@ h1,h2,h3{font-family:var(--display);color:var(--brown);line-height:1.1;margin:0 
 /* Placeholder for Jia's own words */
 .todo{border:2px dashed var(--pink);background:#fff7f8;border-radius:8px;padding:14px 16px;color:var(--muted);font-size:15px}
 .todo strong{color:var(--pink);display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.todo .box-tag{display:inline-block;background:#e0115f;color:#fff;font:700 15px/1 var(--body);letter-spacing:.05em;padding:7px 12px;border-radius:5px;margin-bottom:8px;white-space:nowrap}
 .bg-brown .todo{background:rgba(255,255,255,.06);color:#f3dcdc}
 
 /* Menu list */

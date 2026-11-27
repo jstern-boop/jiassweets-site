@@ -4,7 +4,7 @@ Island Pixel Studios. Keep this file with the site repo (gen.py was lost once)."
 import os, html
 
 OUT = os.path.join(os.path.dirname(__file__), '..', 'docs')
-VER = '2'          # bump after CSS/JS changes so phones reload
+VER = '3'          # bump after CSS/JS changes so phones reload
 NOINDEX = True     # True until launch
 
 PHONE1, PHONE2 = '631-278-1700', '631-839-0948'
@@ -19,6 +19,9 @@ PRODUCTS = [
     ('gift-boxes', 'Gift Boxes', '50.00', 'prod-gift-boxes.webp'),
     ('seasonal-treats', 'Seasonal Treats', '40.00', 'prod-seasonal-treats.webp'),
 ]
+# Text box letters for the product descriptions
+BOX = {'custom-connections': 'I', 'events-favor': 'J', 'fudge': 'K', 'gift-boxes': 'L', 'seasonal-treats': 'M'}
+
 MENU = [
     ('Classic Chocolate Fudge', '14.99'),
     ('Salted Caramel Fudge', '15.99'),
@@ -39,8 +42,10 @@ e = html.escape
 
 def tel(p): return 'tel:+1' + p.replace('-', '')
 
-def todo(what):
-    return f'<div class="todo"><strong>Jia\'s words go here</strong>{e(what)}</div>'
+def todo(box, what):
+    """Placeholder for Jia's own words. `box` is the letter she refers to (TEXT BOX A, B, ...)."""
+    return (f'<div class="todo" id="text-box-{box.lower()}"><span class="box-tag">TEXT BOX {box}</span>'
+            f'<strong>Jia\'s words go here</strong>{e(what)}</div>')
 
 def page(fname, title, desc, body, current=None):
     nav = lambda items: ''.join(
@@ -145,7 +150,7 @@ CALLOUT = '''<section class="callout band"><div class="wrap"><div class="box">
 WHERE = f'''<section class="split band bg-cream"><div class="wrap">
   <div class="media"><img src="images/prod-gift-boxes.webp" alt="Gift box with fudge" loading="lazy" width="900" height="773"></div>
   <div>{heading("Where's the", "fudge", "Find us", center=False)}
-    {todo("Where people can buy Jia's fudge: markets, shops, pop-ups or events, with days and times.")}
+    {todo("C", "Where people can buy Jia's fudge: markets, shops, pop-ups or events, with days and times.")}
     <p style="margin-top:20px"><a class="btn brown" href="contact.html">Ask where we'll be next</a></p></div>
 </div></section>'''
 
@@ -167,7 +172,7 @@ def build():
     <p class="kicker">Handcrafted <b>with love</b></p>
     <h1>Sweet moments</h1>
     <p class="script">made by hand</p>
-    {todo("One or two sentences in Jia's voice: what she makes and who it's for.")}
+    {todo("A", "One or two sentences in Jia's voice: what she makes and who it's for.")}
     <div class="actions"><a class="btn" href="products.html">Shop our products</a><a class="btn ghost" href="contact.html">Design your own favor</a></div>
   </div>
   <div class="hero-img"><img src="images/prod-fudge.webp" alt="Assorted handmade fudge" width="900" height="900"></div>
@@ -181,7 +186,7 @@ def build():
 <section class="split band bg-blush"><div class="wrap">
   <div class="media"><img src="images/prod-events-favor.webp" alt="Event favor bags" loading="lazy" width="900" height="788"></div>
   <div>{heading("What we", "do", "Custom sweets for every occasion and celebration.", center=False)}
-    {todo("A short paragraph about Jia's services: custom favors, event orders, gift boxes, how far ahead to order.")}
+    {todo("B", "A short paragraph about Jia's services: custom favors, event orders, gift boxes, how far ahead to order.")}
     <p style="margin-top:20px"><a class="btn brown" href="services.html">Learn more about our services</a></p></div>
 </div></section>
 {CALLOUT}
@@ -189,7 +194,7 @@ def build():
 {MENU_TEASER}
 <section class="band bg-brown"><div class="wrap center" style="max-width:760px">
   <h2 class="title">Kind words</h2>
-  {todo("Real reviews from Jia's customers, in their own words, with first name and town. Leave this section out until she has some.")}
+  {todo("D", "Real reviews from Jia's customers, in their own words, with first name and town. Leave this section out until she has some.")}
 </div></section>'''
     page('index.html', "Jia's Sweets | Handcrafted Fudge & Party Favors on Long Island",
          "Handcrafted fudge, custom party favors, gift boxes and seasonal treats made by hand on Long Island.", home, 'index.html')
@@ -198,7 +203,7 @@ def build():
     about = f'''{banner("About")}
 <section class="split band"><div class="wrap">
   <div>{heading("About", "us", "Crafting delicious moments every day", center=False)}
-    {todo("Jia's story: who she is, how Jia's Sweets started, what makes her fudge different. Her words, a few short paragraphs.")}</div>
+    {todo("E", "Jia's story: who she is, how Jia's Sweets started, what makes her fudge different. Her words, a few short paragraphs.")}</div>
   <div class="media"><img src="images/about.webp" alt="Jia's Sweets treats" width="1264" height="844"></div>
 </div></section>
 {CALLOUT}
@@ -220,7 +225,7 @@ def build():
 <section class="split band"><div class="wrap">
   <div class="media"><img src="images/prod-custom-connections.webp" alt="Custom favor bag with Jia's Sweets label" width="900" height="793"></div>
   <div>{heading("What we", "do", "Custom sweets for every occasion and celebration.", center=False)}
-    {todo("Each service Jia offers (for example: wedding and shower favors, corporate gifts, holiday boxes), with minimum order and lead time.")}
+    {todo("F", "Each service Jia offers (for example: wedding and shower favors, corporate gifts, holiday boxes), with minimum order and lead time.")}
     <p style="margin-top:20px"><a class="btn" href="contact.html">Request a quote</a></p></div>
 </div></section>
 <section class="band bg-cream"><div class="wrap">
@@ -247,7 +252,7 @@ def build():
     pics = f'''{banner("Pictures")}
 <section class="band"><div class="wrap">
   {heading("Most popular", "creations", "From our kitchen")}
-  {todo("More of Jia's own photos: finished orders, events, her kitchen. Her real photos will make this page.")}
+  {todo("G", "More of Jia's own photos: finished orders, events, her kitchen. Her real photos will make this page.")}
   <div class="gallery" style="margin-top:20px">{''.join(f'<img src="images/{p[3]}" alt="{e(p[1])}" loading="lazy" width="450" height="450">' for p in PRODUCTS)}{gal}</div>
 </div></section>
 {CALLOUT}'''
@@ -269,7 +274,7 @@ def build():
 <section class="band"><div class="wrap"><article class="post">
   <p class="meta">June 12, 2026</p>
   <img src="images/blog-fudge.webp" alt="Handcrafted fudge" width="1296" height="725">
-  {todo("The blog post itself, written by Jia.")}
+  {todo("H", "The blog post itself, written by Jia.")}
 </article></div></section>'''
     page('blog-handcrafted-fudge.html', "Handcrafted Fudge – Made Fresh with Love | Jia's Sweets", "How Jia's Sweets makes its fudge by hand.", post, 'blog.html')
 
@@ -312,7 +317,7 @@ def build():
   <div>
     <h1>{e(name)}</h1>
     <span class="price">${price}</span>
-    {todo(f"A short description of {name}: what's in it, sizes or flavors, how far ahead to order.")}
+    {todo(BOX[slug], f"A short description of {name}: what's in it, sizes or flavors, how far ahead to order.")}
     <p style="margin-top:22px"><a class="btn" href="contact.html">Order this</a></p>
     <p class="order-note">Online payment with Square will be added here.</p>
   </div>
